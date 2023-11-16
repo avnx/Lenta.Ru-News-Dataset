@@ -1,7 +1,5 @@
 import time
-import heapq
 from typing import Union
-from collections import defaultdict
 from dataclasses import dataclass
 
 from bintrees import AVLTree

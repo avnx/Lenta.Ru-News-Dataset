@@ -42,12 +42,46 @@ task6 = Task(id=6,
 
 def test_add_task():
     tq = TaskQueue()
-    tq.add_task(task3)
+    tq.add_task(task1)
+    assert tq.get_task(res1) is task1
+
+
+def test_check_priority():
+    tq = TaskQueue()
     tq.add_task(task2)
     tq.add_task(task1)
-    tq.add_task(task4)
+    available_resources = Resources(ram=10, cpu_cores=10, gpu_count=10)
+    assert tq.get_task(available_resources) is task1
+
+
+def test_check_fifo():
+    tq = TaskQueue()
+    tq.add_task(task2)
     tq.add_task(task5)
-    assert len(tq.priority_tree) == 5
+    tq.add_task(task6)
+    available_resources = Resources(ram=12, cpu_cores=12, gpu_count=12)
+    assert tq.get_task(available_resources) is task2
+    assert tq.get_task(available_resources) is task5
+    assert tq.get_task(available_resources) is task6
+
+
+def test_check_сomparison_fifo_none():
+    tq = TaskQueue()
+    tq.add_task(task2)
+    tq.add_task(task5)
+    tq.add_task(task6)
+    tq.add_task(task4)
+    available_resources = Resources(ram=8, cpu_cores=8, gpu_count=8)
+    assert tq.get_task(available_resources) is task5
+    available_resources = Resources(ram=9, cpu_cores=9, gpu_count=9)
+    assert tq.get_task(available_resources) is task2
+    available_resources = Resources(ram=12, cpu_cores=12, gpu_count=12)
+    assert tq.get_task(available_resources) is task6
+    available_resources = Resources(ram=4, cpu_cores=4, gpu_count=4)
+    assert tq.get_task(available_resources) is None
+    available_resources = Resources(ram=6, cpu_cores=6, gpu_count=6)
+    assert tq.get_task(available_resources) is task4
+    assert tq.get_task(available_resources) is None
 
 
 def test_get_task():
