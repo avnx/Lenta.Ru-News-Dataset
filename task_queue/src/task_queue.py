@@ -40,8 +40,7 @@ class TaskQueue:
         Where index will be equal to current timestamp
         This will allow us to process tasks in FIFO order
         """
-        priority = task.priority
-        next_task_key = f'{priority}_{time.time()}'
+        next_task_key = f'{task.priority}_{time.time()}'
         self.priority_tree.update({next_task_key: task})
 
     def get_task(self, available_resources: Resources) -> Union[Task, None]:
