@@ -3,3 +3,4 @@ env
 lenta-ru-news.csv
 .ipynb_checkpoints
 *.egg-info
+.DS_Store
