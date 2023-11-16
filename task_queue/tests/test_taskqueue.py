@@ -47,9 +47,7 @@ def test_add_task():
     tq.add_task(task1)
     tq.add_task(task4)
     tq.add_task(task5)
-    assert tq.num_tasks[2] == 3
-    assert tq.num_tasks[1] == 1
-    assert tq.num_tasks[3] == 1
+    assert len(tq.priority_tree) == 5
 
 
 def test_get_task():

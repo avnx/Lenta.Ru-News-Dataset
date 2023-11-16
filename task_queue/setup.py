@@ -13,5 +13,4 @@ setuptools.setup(
     packages=setuptools.find_packages(
         exclude=["*.tests", "*.tests.*", "tests.*", "tests"]
     ),
-    # entry_points={"console_scripts": ["llm-linter=cli.main:main"]},
 )
